@@ -1,0 +1,34 @@
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: center;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.header button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+}
+.messaging-board {
+  margin-top: 20px;
+}
+.message-form {
+  margin-bottom: 20px;
+}
+.message-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.message-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.message-list li:last-child {
+  border-bottom: none;
+}

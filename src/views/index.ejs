@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Home Page</h1>
+        <div>
+          <button onclick="location.href='/log-in'">Login</button>
+          <button onclick="location.href='/sign-up'">Sign up</button>
+        </div>
+      </div>
+      <div class="messaging-board">
+        <h2>Messaging Board</h2>
+        <form class="message-form" action="/post-message" method="post">
+          <input
+            type="text"
+            name="title"
+            placeholder="Title"
+            style="width: 100%; padding: 10px; border: 1px solid #ccc"
+          />
+          <textarea
+            name="message"
+            placeholder="Message"
+            style="
+              width: 100%;
+              padding: 10px;
+              border: 1px solid #ccc;
+              resize: none;
+            "
+          ></textarea>
+          <input
+            type="submit"
+            value="Post Message"
+            style="padding: 10px 20px; border: none; border-radius: 5px"
+          />
+        </form>
+        <ul class="message-list">
+          <!-- Message list will be populated here -->
+          <li style="border: 1px solid #ccc; padding: 10px">
+            <h3>Message Title</h3>
+            <p>Message text...</p>
+          </li>
+          <!-- Example message -->
+          <li style="border: 1px solid #ccc; padding: 10px">
+            <h3>Hello World!</h3>
+            <p>This is a sample message.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
