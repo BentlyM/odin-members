@@ -23,6 +23,7 @@
             name="title"
             placeholder="Title"
             style="width: 100%; padding: 10px; border: 1px solid #ccc"
+            onkeydown="if(event.key === 'Enter') event.preventDefault()"
           />
           <textarea
             name="message"
@@ -34,11 +35,15 @@
               resize: none;
             "
           ></textarea>
+          <% if (user) { %>
           <input
             type="submit"
             value="Post Message"
             style="padding: 10px 20px; border: none; border-radius: 5px"
           />
+          <% } else { %>
+            <span>You Must <a href="/log-in">Login</a> In Order To Post</span>
+            <% } %>
         </form>
         <ul class="message-list">
           <!-- Message list will be populated here -->
