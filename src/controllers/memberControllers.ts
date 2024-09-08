@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import db from '../db/queries';
 import bcrypt from 'bcryptjs';
-import passport from 'passport';
 
 export const home = (request: Request, response: Response) => {
   response.render('index', { user: request.user });
@@ -29,11 +28,6 @@ export const signup = (
 
 export const login = (request: Request, response: Response) => {
   if (request.method == 'GET') return response.render('log-in-form');
-
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/log-in',
-  });
 };
 
 export const logout = (
