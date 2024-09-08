@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {NextFunction, Request, Response} from 'express';
 import { home, login, signup } from '../controllers/memberControllers';
 
 
@@ -10,5 +10,6 @@ router.get('/sign-up' , signup);
 router.post('/sign-up', signup);
 
 router.get('/log-in', login);
+router.post('/log-in', login);
 
 export default router;
