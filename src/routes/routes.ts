@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { home, login, signup } from '../controllers/memberControllers';
+import { home, login, logout, signup } from '../controllers/memberControllers';
 import passport from 'passport';
 import '../strategies/local-strategy';
 
@@ -19,5 +19,7 @@ router.post(
   }),
   login
 );
+
+router.post('/log-out', logout);
 
 export default router;
