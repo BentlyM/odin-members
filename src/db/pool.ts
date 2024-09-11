@@ -9,5 +9,13 @@ const pool = new Pool({
     port: 5432,
   });
 
+export const messagePool = new Pool({
+  host: 'localhost',
+  user: 'bently',
+  database: 'message_inventory',
+  password: 'drpenguindev',
+  port: 5432
+})
+
 export default pool;
   

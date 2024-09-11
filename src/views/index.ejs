@@ -15,16 +15,16 @@
           <button onclick="location.href='/log-in'">Login</button>
           <button onclick="location.href='/sign-up'">Sign up</button>
           <% } else { %>
-            <span>Welcome <%= user.username %></span>
-            <form action="/log-out" method="POST">
-              <input type="submit" value="Logout" />
-            </form>
-            <% } %>
+          <span>Welcome <%= user.username %></span>
+          <form action="/log-out" method="POST">
+            <input type="submit" value="Logout" />
+          </form>
+          <% } %>
         </div>
       </div>
       <div class="messaging-board">
         <h2>Messaging Board</h2>
-        <form class="message-form" action="/post-message" method="post">
+        <form class="message-form" action="/post-message" method="POST">
           <input
             type="text"
             name="title"
@@ -49,20 +49,17 @@
             style="padding: 10px 20px; border: none; border-radius: 5px"
           />
           <% } else { %>
-            <span>You Must <a href="/log-in">Login</a> In Order To Post</span>
-            <% } %>
+          <span>You Must <a href="/log-in">Login</a> In Order To Post</span>
+          <% } %>
         </form>
         <ul class="message-list">
           <!-- Message list will be populated here -->
+          <% messages.forEach((message) => { %>
           <li style="border: 1px solid #ccc; padding: 10px">
-            <h3>Message Title</h3>
-            <p>Message text...</p>
+            <h3><%= message.title %></h3>
+            <p><%= message.message %></p>
           </li>
-          <!-- Example message -->
-          <li style="border: 1px solid #ccc; padding: 10px">
-            <h3>Hello World!</h3>
-            <p>This is a sample message.</p>
-          </li>
+          <% }); %>
         </ul>
       </div>
     </div>

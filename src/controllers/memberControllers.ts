@@ -2,8 +2,16 @@ import { NextFunction, Request, Response } from 'express';
 import db from '../db/queries';
 import bcrypt from 'bcryptjs';
 
-export const home = (request: Request, response: Response) => {
-  response.render('index', { user: request.user });
+
+type Messages = {
+  username?: string,
+  title: string,
+  message: string
+}
+
+export const home = async (request: Request, response: Response) => {
+    const messages : Messages[] = (await db.messages()).rows;
+    response.render('index', { user: request.user, messages: messages });
 };
 
 export const signup = (
