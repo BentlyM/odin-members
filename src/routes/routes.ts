@@ -1,11 +1,12 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { home, login, logout, signup } from '../controllers/memberControllers';
+import { home, login, logout, postHome, signup } from '../controllers/memberControllers';
 import passport from 'passport';
 import '../strategies/local-strategy';
 
 const router = express.Router();
 
 router.get('/', home);
+router.post('/', postHome);
 
 router.get('/sign-up', signup);
 router.post('/sign-up', signup);

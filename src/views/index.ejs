@@ -24,13 +24,14 @@
       </div>
       <div class="messaging-board">
         <h2>Messaging Board</h2>
-        <form class="message-form" action="/post-message" method="POST">
+        <form class="message-form" action="/" method="POST">
           <input
             type="text"
             name="title"
             placeholder="Title"
             style="width: 100%; padding: 10px; border: 1px solid #ccc"
             onkeydown="if(event.key === 'Enter') event.preventDefault()"
+            required
           />
           <textarea
             name="message"
@@ -47,6 +48,7 @@
             type="submit"
             value="Post Message"
             style="padding: 10px 20px; border: none; border-radius: 5px"
+            required
           />
           <% } else { %>
           <span>You Must <a href="/log-in">Login</a> In Order To Post</span>
@@ -55,10 +57,18 @@
         <ul class="message-list">
           <!-- Message list will be populated here -->
           <% messages.forEach((message) => { %>
-          <li style="border: 1px solid #ccc; padding: 10px">
-            <h3><%= message.title %></h3>
-            <p><%= message.message %></p>
-          </li>
+            <li class="message-card" style="border: 1px solid #ccc; padding: 15px; margin: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <% if (!user) /* this should be member not user users cant see the name only members */ { %>
+                  <div style="font-weight: bold; font-size: 1.1em; color: #333;">Anonymous</div>
+                  <% } else { %>
+                    <div style="font-weight: bold; font-size: 1.1em; color: #333;"><%= message.username %></div>
+                  <% } %>
+                <div style="font-size: 0.9em; color: #777;"><%= message.date %></div>
+              </div>
+              <h3 style="margin: 0 0 10px 0; font-size: 1.2em; color: #222;"><%= message.title %></h3>
+              <span style="font-size: 1em; color: #555; line-height: 1.5;"><%= message.message %></span>
+            </li>
           <% }); %>
         </ul>
       </div>

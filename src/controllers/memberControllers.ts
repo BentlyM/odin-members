@@ -14,6 +14,22 @@ export const home = async (request: Request, response: Response) => {
     response.render('index', { user: request.user, messages: messages });
 };
 
+export const postHome = async (request:Request , response: Response) => {
+  try{
+    const title : string = request.body.title;
+    const message: string = request.body.message;
+    const user: string = (request.user as { username: string })!.username;
+  
+    if(title == '' || message == '' || user == '') throw new Error('One or More fields are missing...');
+  
+    await db.createMessage(user, title, message);
+
+    response.redirect('/')
+  }catch(e){
+    response.status(404).send(`${e}`);
+  }
+}
+
 export const signup = (
   request: Request,
   response: Response,
