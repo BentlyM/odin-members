@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="js/script.js" defer></script>
   </head>
   <body>
     <div class="container">
@@ -57,19 +58,20 @@
         <ul class="message-list">
           <!-- Message list will be populated here -->
           <% messages.forEach((message) => { %>
-            <li class="message-card" style="border: 1px solid #ccc; padding: 15px; margin: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <li class="message-card" data-id="<%= message.message_id %>" style="border: 1px solid #ccc; padding: 15px; margin: 10px 0; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: relative; max-width: 600px; width: 100%; box-sizing: border-box;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <% if (!user) /* this should be member not user users cant see the name only members */ { %>
                   <div style="font-weight: bold; font-size: 1.1em; color: #333;">Anonymous</div>
-                  <% } else { %>
-                    <div style="font-weight: bold; font-size: 1.1em; color: #333;"><%= message.username %></div>
-                  <% } %>
+                <% } else { %>
+                  <div style="font-weight: bold; font-size: 1.1em; color: #333;"><%= message.username %></div>
+                <% } %>
                 <div style="font-size: 0.9em; color: #777;"><%= message.date %></div>
               </div>
               <h3 style="margin: 0 0 10px 0; font-size: 1.2em; color: #222;"><%= message.title %></h3>
               <span style="font-size: 1em; color: #555; line-height: 1.5;"><%= message.message %></span>
+              <button style="position: absolute; bottom: 15px; right: 15px; padding: 8px 12px; border: none; border-radius: 4px; background-color: #e74c3c; color: white; cursor: pointer; font-size: 0.9em;" onclick="handleDelete('<%= message.message_id %>')">Delete</button>
             </li>
-          <% }); %>
+          <% }); %>                 
         </ul>
       </div>
     </div>
