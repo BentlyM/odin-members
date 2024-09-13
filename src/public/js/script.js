@@ -1,17 +1,18 @@
 const handleDelete =  async (messageId) => {
-    console.log(`message: you tried to delete number ${1}`);
-    const response = await fetch('/',{
+    const response = await fetch(`http://127.0.0.9:8080/${messageId}`,{
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
         }
     });
-    if(!response.ok) return console.log('failed to delete message');
 
-    const item = document.querySelector(`li[data-id="${messageId}"]`);
+    if(!response.ok) throw new Error(`failed to delete message: ${response.statusText}`);
 
-    if(item){
-        item.remove();
+    const messageNode = document.querySelector(`li[data-id="${messageId}"]`);
+    const message = await response.json(); 
+
+    if(messageNode && message){
+        messageNode.remove();
     }
     
 }

@@ -19,11 +19,31 @@ const messages = async () => {
   return await messagePool.query('SELECT * FROM Messages');
 };
 
-const createMessage = async (username: string | undefined, title: string, msg: string) => {
+const createMessage = async (
+  username: string | undefined,
+  title: string,
+  msg: string
+) => {
   await messagePool.query(
     'INSERT INTO messages (username,title,message) VALUES ($1 , $2, $3)',
     [username, title, msg]
   );
 };
 
-export default { insertUser, selectUser, selectId, messages, createMessage };
+const deleteMessage = async (id: number) => {
+  try {
+    await messagePool.query('DELETE FROM messages WHERE message_id = $1', [id]);
+  } catch (err) {
+    console.error('Error executing query', err);
+    throw err;
+  }
+};
+
+export default {
+  insertUser,
+  selectUser,
+  selectId,
+  messages,
+  createMessage,
+  deleteMessage,
+};

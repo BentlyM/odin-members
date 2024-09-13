@@ -2,33 +2,45 @@ import { NextFunction, Request, Response } from 'express';
 import db from '../db/queries';
 import bcrypt from 'bcryptjs';
 
-
 type Messages = {
-  username?: string,
-  title: string,
-  message: string
-}
-
-export const home = async (request: Request, response: Response) => {
-    const messages : Messages[] = (await db.messages()).rows;
-    response.render('index', { user: request.user, messages: messages });
+  username?: string;
+  title: string;
+  message: string;
 };
 
-export const postHome = async (request:Request , response: Response) => {
-  try{
-    const title : string = request.body.title;
+export const home = async (request: Request, response: Response) => {
+  const messages: Messages[] = (await db.messages()).rows;
+
+  response.render('index', { user: request.user, messages: messages });
+};
+
+export const postHome = async (request: Request, response: Response) => {
+  try {
+    const title: string = request.body.title;
     const message: string = request.body.message;
     const user: string = (request.user as { username: string })!.username;
-  
-    if(title == '' || message == '' || user == '') throw new Error('One or More fields are missing...');
-  
+
+    if (title == '' || message == '' || user == '')
+      throw new Error('One or More fields are missing...');
+
     await db.createMessage(user, title, message);
 
-    response.redirect('/')
-  }catch(e){
+    response.redirect('/');
+  } catch (e) {
     response.status(404).send(`${e}`);
   }
-}
+};
+
+export const deleteHome = async (request: Request, response: Response) => {
+  const id: number = parseInt(request.params.id);
+
+  try {
+    await db.deleteMessage(id);
+    response.status(200).json({msg: 'Message deleted successfully'});
+  } catch (err) {
+    response.status(500).json({Error: 'Error deleting message'});
+  }
+};
 
 export const signup = (
   request: Request,
